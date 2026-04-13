@@ -1,18 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom"; // Import Link for Back Button
-import { Film, BookOpen, Star, ArrowLeft, Filter, ThumbsUp, Eye, Sparkles, ChevronDown, ChevronUp } from "lucide-react"; // Added ChevronDown/Up
+// Added StarHalf to correctly render 4.5, 3.5, etc.
+import { Film, BookOpen, Star, ArrowLeft, Filter, ThumbsUp, Eye, Sparkles, ChevronDown, ChevronUp, StarHalf } from "lucide-react"; 
 import Meta from "../components/Meta"; // Assuming Meta component exists
 import { GT } from "../config/constants"; // Assuming GT constants are imported
-// Removed external REVIEWS import if you have one, using inline definition based on previous context.
-// If your main data source is content.js, import { REVIEWS } from "../data/content"; instead
-
-// Mock constants (keep if not importing from constants.js)
-// const GT = {
-//   RED: "#B30000",
-//   LOGO: "https://guindytimes.com/static/mainsite/images/gttrans.png",
-//   TITLE: "NAVARASA",
-//   SUBTITLE: "Nine Feelings, Infinite Insights"
-// };
 
 // --- Reviews Data based on PDF ---
 const REVIEWS = [
@@ -28,9 +19,9 @@ const REVIEWS = [
     content: `<p>If you think comedy today is all loud jokes and slapstick, Lootcase will surprise you. This Hindi film follows Nandan, an ordinary printing press employee, whose life changes overnight when he finds an abandoned suitcase filled with cash. What begins as a stroke of luck soon spirals into chaos, drawing him into a hilarious web of gangsters, politicians, and police officers.</p>
     <p>Kunal Khemu delivers a standout performance, portraying Nandan's simplicity and confusion with ease. The film's strength lies in its clever writing, sharp dialogues, and situational humor, which feels grounded and relatable.</p>
     <p>Lootcase is not just a comedy film; it's a reminder of how a simple story with smart humor can stand out without flashy effects or over-the-top drama. If you want a feel-good film that'll make you laugh till your cheeks hurt, then Lootcase is the perfect choice.</p>`, // Full HTML content
-    featured: true // Or false depending on your logic
+    featured: true 
   },
-   {
+  {
     id: 'good-omens-book', // Use string ID
     title: "Good Omens",
     category: "Book",
@@ -42,18 +33,18 @@ const REVIEWS = [
     content: `<p>If the end of the world were real, I'd expect chaos, fire, and maybe a few professors handing out assignments until the last second. But Good Omens imagines it differently: the Apocalypse—with jokes.</p>
     <p>Neil Gaiman and Terry Pratchett take the most serious themes, like Heaven vs. Hell, Good vs. Evil, and give them the most unserious treatment. There's an angel (Aziraphale) who loves rare books and food, a demon (Crowley) who drives too fast and secretly cares for humans, and together they form the strangest yet most relatable pair of "friends." Their mission? Stop the Antichrist from ending the world. The twist? The Antichrist just wants to play with his dog and enjoy childhood.</p>
     <p>The humour isn't loud but sneaks up in clever lines and awkward situations. Beneath it all, the book asks: are we really "good" or "bad," or just people surviving Mondays? Maybe the end of the world isn't as scary as the thought of losing people who truly understand oneself.</p>`, // Full HTML content
-    featured: true // Or false depending on your logic
+    featured: true 
   }
 ];
 
 // Reusable PageWrapper (keep or import)
 const PageWrapper = ({ children, title }) => (
   <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
-     {title && (
-        <h2 className={`text-4xl font-extrabold mb-8 text-center md:text-left text-[${GT.RED}]`} style={{ fontFamily: "'Montserrat', sans-serif" }}>
-          {title}
-        </h2>
-      )}
+    {title && (
+      <h2 className={`text-4xl font-extrabold mb-8 text-center md:text-left text-[${GT.RED}]`} style={{ fontFamily: "'Montserrat', sans-serif" }}>
+        {title}
+      </h2>
+    )}
     {children}
   </div>
 );
@@ -69,10 +60,33 @@ const ContentCard = ({ children, className = "" }) => (
 const ReviewItem = ({ review }) => {
   const [expanded, setExpanded] = useState(false);
   const Icon = review.category === "Movie" ? Film : BookOpen;
-  // Use GT Red for icon background consistently
   const iconBgColor = `bg-[${GT.RED}]`;
-  // Use GT Red for border consistently
   const borderColor = `border-[${GT.RED}]`;
+
+  // --- New Star Rating Logic ---
+  const renderStars = (rating) => {
+    const stars = [];
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = (rating - fullStars) >= 0.5;
+    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+
+    // Add full stars
+    for (let i = 0; i < fullStars; i++) {
+      stars.push(<Star key={`full-${i}`} className="w-4 h-4 text-yellow-400 fill-yellow-400" />);
+    }
+
+    // Add half star
+    if (hasHalfStar) {
+      stars.push(<StarHalf key="half" className="w-4 h-4 text-yellow-400 fill-yellow-400" />);
+    }
+
+    // Add empty stars
+    for (let i = 0; i < emptyStars; i++) {
+      stars.push(<Star key={`empty-${i}`} className="w-4 h-4 text-gray-300" />);
+    }
+    
+    return stars;
+  };
 
   return (
     <ContentCard className={`border-t-4 ${borderColor}`}>
@@ -85,10 +99,18 @@ const ReviewItem = ({ review }) => {
           </div>
 
           <div className="flex-1">
-            <div className="flex flex-wrap items-center gap-2 mb-2">
-              {/* Category tag using GT Red */}
+            {/* --- ALIGNMENT FIX: Title and Author moved UP --- */}
+            <h3 className="text-2xl md:text-3xl font-black text-gray-900 mb-1" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+              {review.title}
+            </h3>
+            <p className="text-sm text-gray-600 font-medium mb-2">
+              {review.category === "Book" && review.authors ? `By ${review.authors}` : ''}
+            </p>
+            
+            {/* --- ALIGNMENT FIX: Tags moved DOWN --- */}
+            <div className="flex flex-wrap items-center gap-2">
               <span className={`inline-flex items-center gap-1 bg-red-100 text-red-800 px-3 py-1 rounded-full text-xs font-bold`}>
-                 {review.category} {review.year ? `(${review.year})` : ''}
+                {review.category} {review.year ? `(${review.year})` : ''}
               </span>
               {review.featured && (
                 <span className="inline-flex items-center gap-1 bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-bold">
@@ -97,29 +119,15 @@ const ReviewItem = ({ review }) => {
                 </span>
               )}
             </div>
-
-             {/* Title aligned with icon due to flex items-start */}
-            <h3 className="text-2xl md:text-3xl font-black text-gray-900 mb-1" style={{ fontFamily: "'Montserrat', sans-serif" }}>
-              {review.title}
-            </h3>
-             {/* Display specific author if available */}
-             <p className="text-sm text-gray-600 font-medium">
-               {review.category === "Book" && review.authors ? `By ${review.authors}` : ''}
-             </p>
           </div>
         </div>
 
-        {/* Rating Stars */}
+        {/* Rating Stars: Aligned with text content, not icon */}
         {review.rating && (
-          <div className="flex items-center gap-2 mt-4">
+          <div className="flex items-center gap-2 pt-4 px-6 md:px-8">
             <div className="flex items-center gap-0.5">
-              {[...Array(5)].map((_, i) => (
-                <Star
-                  key={i}
-                  className={`w-4 h-4 ${i < Math.floor(review.rating ?? 0) ? 'text-yellow-400 fill-yellow-400' : (i < (review.rating ?? 0) ? 'text-yellow-400' : 'text-gray-300')}`}
-                   fill={i < (review.rating ?? 0) ? 'currentColor' : 'none'}
-                />
-              ))}
+              {/* --- STAR RATING FIX: Using new renderStars function --- */}
+              {renderStars(review.rating)}
             </div>
             <span className="text-sm font-bold text-gray-800">{review.rating?.toFixed(1)}</span>
             <span className="text-xs text-gray-500">/ 5</span>
@@ -128,14 +136,13 @@ const ReviewItem = ({ review }) => {
       </div>
 
       {/* Content Section */}
-      <div className="p-6 md:p-8">
+      <div className="p-6 md:p-8 pt-4"> {/* Removed redundant top padding */}
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-4 text-xs">
           <span className="flex items-center gap-1 text-gray-600 font-medium">
             <Eye className="w-3.5 h-3.5" />
             {review.genre || 'General'}
           </span>
           <span className="text-gray-300 hidden sm:inline">•</span>
-           {/* Display actual reviewer from PDF data */}
           <span className="text-gray-500">Reviewed by {review.author}</span>
         </div>
 
@@ -155,7 +162,7 @@ const ReviewItem = ({ review }) => {
           className="mt-4 inline-flex items-center gap-1 text-red-600 font-bold hover:text-red-700 transition-colors text-sm group"
         >
           {expanded ? 'Show Less' : 'Read Full Review'}
-           {expanded ? <ChevronUp className="w-4 h-4 transition-transform"/> : <ChevronDown className="w-4 h-4 transition-transform"/> }
+          {expanded ? <ChevronUp className="w-4 h-4 transition-transform"/> : <ChevronDown className="w-4 h-4 transition-transform"/> }
         </button>
 
         {/* Like Button & Footer */}
@@ -186,16 +193,16 @@ export default function Reviews() {
 
   return (
     <main className="min-h-screen bg-gray-50"> {/* Use light gray bg */}
-        <Meta title={`Reviews - ${GT.TITLE}`} description={`Movie and book reviews from the ${GT.TITLE} ${GT.SUBTITLE} edition.`} />
+      <Meta title={`Reviews - ${GT.TITLE}`} description={`Movie and book reviews from the ${GT.TITLE} ${GT.SUBTITLE} edition.`} />
 
       {/* Hero Header */}
       <section className="relative bg-gradient-to-r from-red-600 to-red-700 text-white py-16 sm:py-20 px-4 sm:px-6 overflow-hidden mb-12">
         {/* Decorative elements */}
-         <div className="absolute inset-0 opacity-10 z-0">
-           <div className="absolute top-10 right-10 w-64 h-64 bg-white rounded-full blur-3xl animate-pulse"></div>
-           <div className="absolute bottom-10 left-10 w-96 h-96 bg-white rounded-full blur-3xl animate-pulse" style={{animationDelay: '0.5s'}}></div>
-         </div>
-         {/* Content - Centered */}
+        <div className="absolute inset-0 opacity-10 z-0">
+          <div className="absolute top-10 right-10 w-64 h-64 bg-white rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-10 left-10 w-96 h-96 bg-white rounded-full blur-3xl animate-pulse" style={{animationDelay: '0.5s'}}></div>
+        </div>
+        {/* Content - Centered */}
         <div className="relative max-w-6xl mx-auto z-10 animate-fade-in text-center">
           <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-5 text-sm">
             <Star className="w-4 h-4" />
@@ -234,10 +241,10 @@ export default function Reviews() {
                 ))}
               </div>
             </div>
-             <p className="text-xs text-gray-500 text-right shrink-0">
-               Showing <span className="font-bold text-red-600">{filteredReviews.length}</span> review{filteredReviews.length !== 1 ? 's' : ''}
-             </p>
-           </div>
+            <p className="text-xs text-gray-500 text-right shrink-0">
+              Showing <span className="font-bold text-red-600">{filteredReviews.length}</span> review{filteredReviews.length !== 1 ? 's' : ''}
+            </p>
+          </div>
         </div>
 
         {/* Reviews List */}
@@ -248,8 +255,8 @@ export default function Reviews() {
             ))}
           </div>
         ) : (
-           // No Results Message
-           <div className="text-center py-16">
+          // No Results Message
+          <div className="text-center py-16">
             <Film className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <h3 className="text-2xl font-bold text-gray-900 mb-2">No reviews found</h3>
             <p className="text-gray-600 mb-6">Try adjusting your filter.</p>
@@ -274,7 +281,7 @@ export default function Reviews() {
         {/* Back to Home Link */}
         <div className="mt-12 pt-8 border-t border-gray-200">
           <Link to="/"
-             className="inline-flex items-center gap-2 text-gray-600 hover:text-[#B30000] font-semibold transition-colors group text-sm">
+            className="inline-flex items-center gap-2 text-gray-600 hover:text-[#B30000] font-semibold transition-colors group text-sm">
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
             Back to Home
           </Link>

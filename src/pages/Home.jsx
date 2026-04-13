@@ -25,107 +25,241 @@ export default function Home() {
       <Meta title={`${GT.TITLE} — ${GT.SUBTITLE}`} description={GT.SITE_DESC} />
 
       {/* Hero Section - Full Height with Centering */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-white via-red-50 to-gray-100 px-4 sm:px-6">
-        {/* Decorative Background Elements */}
-        <div className="absolute inset-0 opacity-10 z-0">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-red-300 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-red-200 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+<section className="relative min-h-screen flex items-center bg-gradient-to-b from-white via-red-50 to-white overflow-hidden">
+        {/* Subtle animated background elements */}
+        <div className="absolute inset-0 z-0 opacity-30">
+          <div className="absolute top-20 right-20 w-64 h-64 bg-red-200 rounded-full blur-3xl animate-blob"></div>
+          <div className="absolute bottom-20 left-20 w-96 h-96 bg-red-100 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-red-50 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
         </div>
 
-        {/* Centered Content Grid */}
-        <div className="relative z-10 max-w-7xl w-full mx-auto grid lg:grid-cols-2 gap-12 items-center py-12"> {/* Added w-full and py-12 */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-16 lg:py-20 w-full">
           
-          {/* Left: Text Content */}
-          <div className="space-y-6 animate-fade-in">
-            <div className="inline-flex items-center gap-2 bg-white border border-gray-300 px-4 py-2 rounded-full shadow-sm">
-              <Sparkles className="w-4 h-4 text-red-600" />
-               {/* Corrected Date from PDF */}
-              <span className="text-sm font-medium text-gray-700">Edition No. 1 • September 24, 2021</span> 
-            </div>
-
-            <div>
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black mb-4 text-gray-900 leading-tight" style={{ fontFamily: "'Montserrat', sans-serif" }}>
-                <span className="bg-gradient-to-r from-red-600 to-red-800 bg-clip-text text-transparent">
-                  {GT.TITLE}
-                </span>
-              </h1>
-              <p className="text-2xl sm:text-3xl font-bold text-gray-700 mb-3" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+          {/* Main Masthead with staggered animation */}
+          <div className="text-center mb-10 animate-fade-in-up" style={{animationDelay: '200ms'}}>
+            <h1 className="text-5xl sm:text-6xl lg:text-8xl font-black mb-4 text-gray-900 leading-none tracking-tight animate-scale-in" style={{ fontFamily: "'Playfair Display', 'Georgia', serif", animationDelay: '300ms' }}>
+              <span className="inline-block hover:text-red-600 transition-colors duration-500 cursor-default">
+                {GT.TITLE}
+              </span>
+            </h1>
+            <div className="flex items-center justify-center gap-4 mb-5 animate-fade-in" style={{animationDelay: '500ms'}}>
+              <div className="h-0.5 w-20 bg-gradient-to-r from-transparent to-red-600 animate-expand-right"></div>
+              <p className="text-xl sm:text-2xl font-serif italic text-gray-700 hover:text-red-600 transition-colors duration-300">
                 {GT.SUBTITLE}
               </p>
-              <p className="text-lg text-gray-600 leading-relaxed">
-                The Official Magazine of CEG, ACT, SAP
-              </p>
+              <div className="h-0.5 w-20 bg-gradient-to-l from-transparent to-red-600 animate-expand-left"></div>
             </div>
+            <p className="text-xs sm:text-sm uppercase tracking-widest text-gray-500 font-semibold animate-fade-in" style={{animationDelay: '700ms'}}>
+              The Official Magazine of CEG, ACT, SAP
+            </p>
+          </div>
 
-            {/* HASYA Feature Box */}
-            <div className="relative bg-gradient-to-r from-red-50 to-white border-l-4 border-red-600 p-6 rounded-r-xl shadow-lg">
-               {/* Decorative blur element */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-red-100 rounded-full blur-2xl opacity-30 z-0"></div> 
-              <div className="relative z-10"> {/* Content above blur */}
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center shadow-md">
-                    {/* Icon updated */}
-                    <Laugh className="w-6 h-6 text-white" /> 
-                  </div>
-                  <h2 className="text-3xl font-black text-red-600" style={{fontFamily: "'Montserrat', sans-serif"}}>
+          {/* Featured Edition - REDESIGNED Card */}
+          <div className="max-w-4xl mx-auto mb-10 animate-fade-in-up" style={{animationDelay: '800ms'}}>
+            <div className="relative group perspective-1000">
+              {/* Glowing border effect */}
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-red-600 via-red-500 to-red-600 rounded-2xl opacity-75 group-hover:opacity-100 blur group-hover:blur-md transition duration-500 animate-gradient-x"></div>
+              
+              <div className="relative bg-white rounded-2xl overflow-hidden shadow-2xl transform group-hover:scale-[1.02] transition-all duration-500">
+                {/* Background Image Placeholder (replace with actual image if desired) */}
+                {/* For example: style={{ backgroundImage: "url('/path/to/your-magazine-cover.jpg')", backgroundSize: 'cover', backgroundPosition: 'center' }} */}
+                <div className="absolute inset-0 bg-gradient-to-br from-red-50 to-white opacity-40 z-0"></div>
+                
+                <div className="relative z-10 p-8 lg:p-12 flex flex-col justify-center items-center text-center">
+                  
+                  {/* "Celebrating 30 Years" badge moved here */}
+<div className="flex items-center justify-center mb-8 animate-slide-down">
+  <div className="group inline-flex items-center gap-2 bg-white border-2 border-red-600 px-6 py-2.5 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+    {/* REMOVED 'animate-pulse-slow' and ADDED 'group-hover:scale-110' for a professional hover effect */}
+    <Award className="w-5 h-5 text-red-600 transition-transform duration-300 group-hover:scale-110" />
+    <span className="text-red-600 font-bold text-sm uppercase tracking-wider">Celebrating 30 Years</span>
+  </div>
+</div>
+
+                  <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black mb-3 leading-tight bg-gradient-to-r from-red-700 to-red-900 bg-clip-text text-transparent" style={{fontFamily: "'Montserrat', sans-serif"}}>
                     HASYA
                   </h2>
+                  <p className="text-2xl sm:text-3xl font-bold mb-4 text-gray-800">
+                    The Laughter Edition
+                  </p>
+                  <p className="text-base sm:text-lg text-gray-600 leading-relaxed mb-6 max-w-2xl">
+                    Exploring the universal language of joy and connection through 43 muscles that light up when we laugh. Featuring scientific research, poetry, cultural stories, and the neuroscience of happiness.
+                  </p>
+                  
+                  {/* Mini tags */}
+                  <div className="flex flex-wrap justify-center gap-2">
+                    <span className="inline-flex items-center gap-1 px-3 py-1 bg-red-50 text-red-600 rounded-full text-xs font-semibold hover:bg-red-100 transition-colors">
+                      <Sparkles className="w-3 h-3" />
+                      Science
+                    </span>
+                    <span className="inline-flex items-center gap-1 px-3 py-1 bg-red-50 text-red-600 rounded-full text-xs font-semibold hover:bg-red-100 transition-colors">
+                      <Feather className="w-3 h-3" />
+                      Poetry
+                    </span>
+                    <span className="inline-flex items-center gap-1 px-3 py-1 bg-red-50 text-red-600 rounded-full text-xs font-semibold hover:bg-red-100 transition-colors">
+                      <FileText className="w-3 h-3" />
+                      Culture
+                    </span>
+                  </div>
                 </div>
-                <p className="text-lg font-semibold text-gray-800 mb-2">
-                  The Laughter Edition
-                </p>
-                <p className="text-gray-600 text-sm"> {/* Slightly smaller text */}
-                  Exploring the universal language of joy and connection through 43 muscles that light up when we laugh.
-                </p>
               </div>
-            </div>
-
-            {/* Guindy Times Legacy Badge */}
-            <div className="flex items-center gap-4 p-4 bg-white rounded-xl border border-gray-200 shadow-sm">
-              <Award className="w-10 h-10 text-red-600" />
-              <div>
-                <p className="font-bold text-gray-900">30 Years of Excellence</p>
-                <p className="text-sm text-gray-600">The Guindy Times Publishing Legacy</p>
-              </div>
-            </div>
-
-            {/* CTA Links (Changed from button to Link) */}
-            <div className="flex flex-wrap gap-4 pt-4">
-               {/* Changed to Link */}
-              <Link 
-                to="/articles" 
-                className="group inline-flex items-center gap-2 px-6 py-3 bg-red-600 text-white font-bold rounded-lg shadow-lg hover:bg-red-700 hover:shadow-xl transition-all duration-300 hover:scale-105"
-              >
-                <BookOpen className="w-5 h-5" />
-                Explore Articles
-                <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-               {/* Changed to Link */}
-              <Link 
-                to="/poetry" 
-                className="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-800 font-bold rounded-lg border-2 border-gray-300 shadow-md hover:border-red-600 hover:text-red-600 transition-all duration-300 hover:scale-105"
-              >
-                <Feather className="w-5 h-5" />
-                Discover Poetry
-              </Link>
             </div>
           </div>
 
-          {/* Right: Image */}
-          <div className="flex items-center justify-center animate-fade-in-slow">
-            <div className="relative">
-              <div className="absolute -inset-4 bg-red-200 rounded-2xl blur-2xl opacity-30 animate-pulse"></div> {/* Adjusted blur positioning */}
-              
-              <img 
-                src={heroImageUrl} 
-                alt="Navarasa Magazine - Laughter Edition" 
-                className="relative w-full max-w-lg h-auto object-contain rounded-2xl shadow-2xl border-8 border-white transform hover:scale-105 transition-transform duration-500" 
-                onError={(e) => { e.target.onerror = null; e.target.src="https://placehold.co/500x600/B30000/FFFFFF?text=NAVARASA+Scene"; }}
-              />
-            </div>
+          {/* Action Buttons with consistent hover effects */}
+          <div className="flex flex-wrap items-center justify-center gap-4 mb-10 animate-fade-in-up" style={{animationDelay: '1000ms'}}>
+            <Link 
+              to="/articles" 
+              className="group relative inline-flex items-center gap-2 px-8 py-4 bg-red-600 text-white font-bold rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-red-700 to-red-600 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+              <BookOpen className="w-5 h-5 relative z-10 group-hover:rotate-12 transition-transform duration-300" />
+              <span className="relative z-10">Read Articles</span>
+              <ChevronRight className="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform duration-300" />
+            </Link>
+            
+            <Link 
+              to="/poetry" 
+              className="group relative inline-flex items-center gap-2 px-8 py-4 bg-white text-red-600 font-bold rounded-xl border-2 border-red-600 shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
+            >
+              <div className="absolute inset-0 bg-red-600 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+              <Feather className="w-5 h-5 relative z-10 group-hover:text-white group-hover:rotate-12 transition-all duration-300" />
+              <span className="relative z-10 group-hover:text-white transition-colors duration-300">Browse Poetry</span>
+            </Link>
+            
+            <Link 
+              to="/tamil" 
+              className="group relative inline-flex items-center gap-2 px-8 py-4 bg-white text-red-600 font-bold rounded-xl border-2 border-red-600 shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1" // Same style as poetry button
+            >
+              <div className="absolute inset-0 bg-red-600 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+              <FileText className="w-5 h-5 relative z-10 group-hover:text-white group-hover:rotate-12 transition-all duration-300" />
+              <span className="relative z-10 group-hover:text-white transition-colors duration-300">தமிழ் Section</span>
+            </Link>
           </div>
+
+          {/* Quick Stats with counter animation */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 max-w-5xl mx-auto pt-6 border-t-2 border-gray-200 animate-fade-in-up" style={{animationDelay: '1200ms'}}>
+            {[
+              { number: "43", label: "Muscles Engaged", delay: "0ms" },
+              { number: "10k+", label: "Readers", delay: "100ms" },
+              { number: "30", label: "Years Strong", delay: "200ms" },
+              { number: "9", label: "Rasas Explored", delay: "300ms" }
+            ].map((stat, idx) => (
+              <div 
+                key={idx} 
+                className="group text-center p-4 bg-white rounded-xl border-2 border-gray-100 hover:border-red-600 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 animate-fade-in-up"
+                style={{animationDelay: stat.delay}}
+              >
+                <div className="text-3xl lg:text-4xl font-black text-red-600 mb-1 group-hover:scale-110 transition-transform duration-300">
+                  {stat.number}
+                </div>
+                <p className="text-xs sm:text-sm text-gray-600 font-semibold group-hover:text-red-600 transition-colors duration-300">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
+          </div>
+
         </div>
       </section>
+
+      {/* --- Inline Styles for Animations (Keep or move to CSS/Tailwind config) --- */}
+      <style>{`
+        /* Keyframe Definitions */
+        @keyframes fade-in {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes fade-in-up {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slide-down {
+          from { opacity: 0; transform: translateY(-20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes scale-in {
+          from { opacity: 0; transform: scale(0.9); }
+          to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes expand-right {
+          from { width: 0; }
+          to { width: 5rem; } /* 5rem = w-20 */
+        }
+        @keyframes expand-left {
+          from { width: 0; }
+          to { width: 5rem; } /* 5rem = w-20 */
+        }
+        @keyframes gradient-x {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        @keyframes blob {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          33% { transform: translate(30px, -50px) scale(1.1); }
+          66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+        @keyframes bounce-slow {
+          0%, 100% { transform: translateY(-10%); animation-timing-function: cubic-bezier(0.8, 0, 1, 1); }
+          50% { transform: translateY(0); animation-timing-function: cubic-bezier(0, 0, 0.2, 1); }
+        }
+        @keyframes ping-slow {
+          0% { transform: scale(1); opacity: 0.2; }
+          80% { transform: scale(2); opacity: 0; }
+          100% { transform: scale(2); opacity: 0; }
+        }
+        @keyframes pulse-slow {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
+        }
+
+        /* Animation Utility Classes */
+        .animate-fade-in { animation: fade-in 0.6s ease-out forwards; }
+        .animate-fade-in-up { animation: fade-in-up 0.6s ease-out forwards; }
+        .animate-slide-down { animation: slide-down 0.6s ease-out forwards; }
+        .animate-scale-in { animation: scale-in 0.7s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+        .animate-expand-right { animation: expand-right 0.8s 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+        .animate-expand-left { animation: expand-left 0.8s 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+        
+        .animate-gradient-x {
+          background-size: 200% 200%;
+          animation: gradient-x 3s ease infinite;
+        }
+        .animate-blob {
+          animation: blob 7s infinite ease-in-out;
+        }
+        .animate-bounce-slow {
+          animation: bounce-slow 2s infinite;
+        }
+        .animate-ping-slow {
+          animation: ping-slow 3s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+        .animate-pulse-slow {
+          animation: pulse-slow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        /* Animation Delays */
+        .animation-delay-2000 { animation-delay: 2s; }
+        .animation-delay-4000 { animation-delay: 4s; }
+
+        /* Perspective for 3D hover */
+        .perspective-1000 { perspective: 1000px; }
+
+        /* Initial animation state */
+        .animate-fade-in,
+        .animate-fade-in-up,
+        .animate-slide-down,
+        .animate-scale-in {
+          opacity: 0;
+          animation-fill-mode: forwards;
+        }
+        .animate-expand-right,
+        .animate-expand-left {
+          width: 0;
+          animation-fill-mode: forwards;
+        }
+      `}</style>
 
       {/* --- Other Sections --- */}
       

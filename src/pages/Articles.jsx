@@ -3,21 +3,11 @@ import { Link } from "react-router-dom"; // Import Link
 import { BookOpen, User, Clock, ArrowLeft, Search, Filter, ChevronRight, Sparkles, Quote } from "lucide-react";
 import Meta from "../components/Meta"; // Assuming Meta component exists
 import { GT } from "../config/constants"; // Assuming GT constants are imported
-// Removed ARTICLES import, using mock data directly for this example
-// import { ARTICLES } from "../data/content";
 
-// Mock constants and data (as provided in the user's code)
-// const GT = {
-//   RED: "#B30000",
-//   LOGO: "https://guindytimes.com/static/mainsite/images/gttrans.png",
-//   TITLE: "NAVARASA",
-//   SUBTITLE: "Nine Feelings, Infinite Insights"
-// };
-
-// Sample articles based on PDF content (as provided in the user's code)
+// Sample articles based on PDF content (as provided in your content.js)
 const ARTICLES = [
   {
-    id: "laughter-contagious", // Use string IDs consistent with routing
+    id: "laughter-contagious",
     title: "When Laughter Becomes Contagious",
     author: "A. Mrithula",
     department: "Architecture",
@@ -28,7 +18,7 @@ const ARTICLES = [
     featured: true
   },
   {
-    id: "music-of-soul", // Use string IDs consistent with routing
+    id: "music-of-soul",
     title: "Laughter: The Music of the Soul",
     author: "Muni Chandrasekar Reddy K",
     department: "Geo Informatics",
@@ -38,8 +28,8 @@ const ARTICLES = [
     category: "Philosophy",
     featured: true
   },
-    {
-    id: 'au-innovation', // Added innovation article for testing
+  {
+    id: 'au-innovation',
     title: "Where Does Anna University Stand in Today's Technology Landscape?",
     author: 'Kaamila Maisarah M',
     department: 'Chemical Engineering',
@@ -47,36 +37,13 @@ const ARTICLES = [
     type: 'article',
     excerpt: 'Anna University is fast emerging as a hub of innovation with patents and funded projects spanning a wide spectrum.',
     readTime: '6 min read',
-    category: 'Innovation', // Added category
+    category: 'Innovation',
     featured: false,
     content: `<p>Details about innovation...</p>` // Placeholder content
-  },
-  // Added more mock articles based on user's code structure
-   {
-    id: "science-behind-laughter", // Example ID
-    title: "The Science Behind Contagious Laughter",
-    author: "Editorial Team",
-    department: "Various Departments",
-    year: "Multiple Years",
-    excerpt: "Scientific research shows that when we laugh, 43 muscles in our face engage compared to only 17 when we're angry...",
-    readTime: "6 min read",
-    category: "Science",
-    featured: false
-  },
-  {
-    id: "laughter-professional", // Example ID
-    title: "Laughter in Professional Settings",
-    author: "Career Development Team",
-    department: "Placement Cell",
-    year: "Multiple Years",
-    excerpt: "Companies worldwide are recognizing laughter as medicine for workplace stress. Many organizations now host weekly comedy sessions...",
-    readTime: "5 min read",
-    category: "Career",
-    featured: false
   }
 ];
 
-// Styled ContentCard from user's Home.jsx example - Ensure it has overflow-hidden
+// Styled ContentCard
 const ContentCard = ({ children, className = "" }) => (
   <article className={`bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden ${className}`}>
     {children}
@@ -89,7 +56,7 @@ export default function Articles() {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   // Derive categories dynamically from ARTICLES data, plus 'All'
-  const categories = ["All", ...new Set(ARTICLES.map(a => a.category).filter(Boolean))]; // Filter out undefined categories
+  const categories = ["All", ...new Set(ARTICLES.map(a => a.category).filter(Boolean))];
 
   const filteredArticles = ARTICLES.filter(article => {
     // Ensure properties exist before calling toLowerCase
@@ -100,20 +67,18 @@ export default function Articles() {
     return matchesSearch && matchesCategory;
   });
 
-  // No longer separating featured and regular articles for display purposes
-
   return (
-    <main className="min-h-screen bg-gray-50"> {/* Use light gray bg */}
-        <Meta title={`Articles - ${GT.TITLE}`} description={`Read articles from the ${GT.TITLE} ${GT.SUBTITLE} edition.`} />
+    <main className="min-h-screen bg-gray-50">
+      <Meta title={`Articles - ${GT.TITLE}`} description={`Read articles from the ${GT.TITLE} ${GT.SUBTITLE} edition.`} />
 
-      {/* Hero Header - Styled like Home page sections */}
+      {/* Hero Header */}
       <section className="relative bg-gradient-to-r from-red-600 to-red-700 text-white py-16 sm:py-20 px-4 sm:px-6 overflow-hidden mb-12">
         <div className="absolute inset-0 opacity-10 z-0">
           <div className="absolute top-10 right-10 w-64 h-64 bg-white rounded-full blur-3xl animate-pulse"></div>
           <div className="absolute bottom-10 left-10 w-96 h-96 bg-white rounded-full blur-3xl animate-pulse" style={{animationDelay: '0.5s'}}></div>
         </div>
 
-        <div className="relative max-w-6xl mx-auto z-10 animate-fade-in text-center"> {/* Centered Hero Text */}
+        <div className="relative max-w-6xl mx-auto z-10 animate-fade-in text-center">
           <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-5 text-sm">
             <BookOpen className="w-4 h-4" />
             <span className="font-semibold">Insights & Analysis</span>
@@ -122,7 +87,7 @@ export default function Articles() {
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-black mb-3 text-white" style={{ fontFamily: "'Montserrat', sans-serif" }}>
             Articles
           </h1>
-          <p className="text-lg sm:text-xl text-red-100 max-w-2xl mx-auto"> {/* Centered paragraph */}
+          <p className="text-lg sm:text-xl text-red-100 max-w-2xl mx-auto">
             Exploring the depths of HASYA through science, philosophy, and lived experiences from the NAVARASA edition.
           </p>
         </div>
@@ -148,18 +113,18 @@ export default function Articles() {
 
             {/* Category Filter */}
             <div className="relative flex items-center border border-gray-300 rounded-lg px-3 bg-white">
-             <Filter className="w-5 h-5 text-gray-400 mr-2 pointer-events-none" />
+              <Filter className="w-5 h-5 text-gray-400 mr-2 pointer-events-none" />
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
                 className="appearance-none w-full border-none focus:ring-0 text-gray-700 font-medium bg-transparent cursor-pointer py-2.5 text-sm pr-8"
               >
                 {categories.map(cat => (
-                  <option key={cat} value={cat}>{cat || 'Uncategorized'}</option> // Handle potential undefined categories
+                  <option key={cat} value={cat}>{cat || 'Uncategorized'}</option>
                 ))}
               </select>
-               {/* Custom arrow indicator */}
-               <ChevronRight className="w-4 h-4 text-gray-400 absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none rotate-90" />
+              {/* Custom arrow indicator */}
+              <ChevronRight className="w-4 h-4 text-gray-400 absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none rotate-90" />
             </div>
           </div>
 
@@ -172,18 +137,18 @@ export default function Articles() {
         {/* --- Display ALL Filtered Articles using the detailed card style --- */}
         {filteredArticles.length > 0 ? (
           <section>
-             <h2 className="sr-only"> {/* Screen reader only title */}
+            <h2 className="sr-only">
               Article List
             </h2>
 
             {/* Grid for all articles */}
             <div className="grid md:grid-cols-2 gap-8">
               {filteredArticles.map((article) => (
-                <ContentCard key={article.id} className="flex flex-col text-center"> {/* Added text-center to card */}
+                <ContentCard key={article.id} className="flex flex-col text-center">
                   {/* Visual Area */}
                   <div className="relative h-40 bg-gradient-to-br from-red-100 to-red-50 flex items-center justify-center rounded-t-lg -m-6 mb-6">
                     {article.featured && (
-                       <div className="absolute top-2 left-2 z-10">
+                      <div className="absolute top-2 left-2 z-10">
                         <span className="bg-red-600 text-white text-xs font-bold px-2.5 py-1 rounded-full shadow">
                           FEATURED
                         </span>
@@ -192,9 +157,9 @@ export default function Articles() {
                     <Quote className="w-16 h-16 text-red-300 opacity-75" />
                   </div>
 
-                  {/* Content - Removed justify-between from tags, added justify-center */}
+                  {/* Content */}
                   <div className="flex-grow space-y-3 px-6 pb-6">
-                    <div className="flex items-center justify-center flex-wrap gap-2 text-xs"> {/* Centered tags */}
+                    <div className="flex items-center justify-center flex-wrap gap-2 text-xs">
                       <span className="inline-flex items-center gap-1 bg-red-100 text-red-700 px-2.5 py-0.5 rounded-full font-semibold">
                         <BookOpen className="w-3 h-3" />
                         {article.category || 'General'}
@@ -226,23 +191,23 @@ export default function Articles() {
                     </p>
                   </div>
 
-                  {/* Read More Link - Kept left-aligned within centered card for action */}
-                  <div className="mt-auto pt-4 px-6 pb-6 border-t border-gray-100 text-left"> {/* Aligned link left */}
-                     <Link
-                       to={`/articles/${article.id}`}
-                       className="group inline-flex items-center gap-1.5 text-red-600 font-bold hover:gap-2 transition-all text-sm hover:underline"
-                     >
-                       Read Full Article
-                       <ChevronRight className="w-4 h-4" />
-                     </Link>
-                   </div>
+                  {/* Read More Link */}
+                  <div className="mt-auto pt-4 px-6 pb-6 border-t border-gray-100 text-left">
+                    <Link
+                      to={`/articles/${article.id}`}
+                      className="group inline-flex items-center gap-1.5 text-red-600 font-bold hover:gap-2 transition-all text-sm hover:underline"
+                    >
+                      Read Full Article
+                      <ChevronRight className="w-4 h-4" />
+                    </Link>
+                  </div>
                 </ContentCard>
               ))}
             </div>
           </section>
         ) : (
-           // No Results Message
-           <div className="text-center py-16">
+          // No Results Message
+          <div className="text-center py-16">
             <Search className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <h3 className="text-2xl font-bold text-gray-900 mb-2">No articles found</h3>
             <p className="text-gray-600 mb-6">Try adjusting your search or filter criteria.</p>
@@ -269,9 +234,3 @@ export default function Articles() {
     </main>
   );
 }
-
-// Add necessary Tailwind plugins if not already present:
-// @tailwindcss/typography (for prose)
-// @tailwindcss/line-clamp (for line-clamp-*)
-// Make sure fonts (Montserrat, Roboto) are linked in index.html
-

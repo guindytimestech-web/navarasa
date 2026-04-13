@@ -87,7 +87,7 @@ Let it rattle the cage where your sorrows sleep.</p>`,
 <p>சிரிப்பு—<br/>
 மெய்யிற்கும் மனத்திற்கும்<br/>
 பத்துணர்ச்சி தரும் ஓர் அரிய மருந்து.</p>`,
-    featured: false
+    featured: true
   }
 ];
 
@@ -115,8 +115,8 @@ const PoemCard = ({ poem }) => {
                 </span>
               )}
               {isTamil && (
-                <span className="inline-flex items-center gap-1 bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs font-bold">
-                  <Languages className="w-3 h-3" />
+                <span className="inline-flex items-center gap-1 bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-bold">
+                  <BookOpen className="w-3 h-3" />
                   தமிழ்
                 </span>
               )}
@@ -210,7 +210,7 @@ export default function Poetry() {
           <h1 className="text-5xl md:text-6xl font-black mb-4" style={{ fontFamily: "'Montserrat', sans-serif" }}>
             Verses of Laughter
           </h1>
-          <p className="text-xl text-red-100 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-red-100 max-w-2xl mx-auto"> {/* <-- Changed */}
             Exploring the profound beauty of HASYA through poetry—words that dance between silence and sound
           </p>
         </div>
@@ -219,7 +219,7 @@ export default function Poetry() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12">
         {/* Introduction */}
         <div className="mb-12 text-center">
-          <p className="text-lg text-gray-700 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-gray-700 leading-relaxed max-w-2xl mx-auto"> {/* <-- Changed */}
             Poetry captures what prose cannot—the essence of laughter that echoes through time, 
             the silent connection between hearts, and the courage to find joy in darkness.
           </p>
@@ -230,7 +230,7 @@ export default function Poetry() {
           <section className="mb-16">
             <div className="flex items-center gap-3 mb-8">
               <BookOpen className="w-6 h-6 text-red-600" />
-              <h2 className="text-3xl font-black text-gray-900" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+              <h2 className="text-2xl md:text-3xl font-black text-gray-900" style={{ fontFamily: "'Montserrat', sans-serif" }}> {/* <-- Changed */}
                 English Poetry
               </h2>
             </div>
@@ -247,8 +247,8 @@ export default function Poetry() {
         {tamilPoems.length > 0 && (
           <section className="mb-16">
             <div className="flex items-center gap-3 mb-8">
-              <Languages className="w-6 h-6 text-purple-600" />
-              <h2 className="text-3xl font-black text-gray-900" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+              <BookOpen className="w-6 h-6 text-red-600" />
+              <h2 className="text-2xl md:text-3xl font-black text-gray-900" style={{ fontFamily: "'Montserrat', sans-serif" }}> {/* <-- Changed */}
                 தமிழ் கவிதை (Tamil Poetry)
               </h2>
             </div>
@@ -284,7 +284,7 @@ export default function Poetry() {
 
         {/* About Poetry in NAVARASA */}
         <div className="mb-12 bg-white p-8 rounded-xl border border-gray-200 shadow-md">
-          <h3 className="text-2xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+          <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Montserrat', sans-serif" }}> {/* <-- Changed */}
             Why Poetry Matters in HASYA
           </h3>
           <p className="text-gray-700 leading-relaxed mb-4">
